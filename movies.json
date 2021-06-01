@@ -1,0 +1,44 @@
+[
+  {
+    "model": "api.actor",
+    "pk": 1,
+    "fields": {
+      "name": "Michael B. Jordan",
+      "city": "Berlin"
+    }
+  },
+  {
+    "model": "api.actor",
+    "pk": 2,
+    "fields": {
+      "name": "Sylvester Stallone",
+      "city": "London"
+    }
+  },
+    {
+    "model": "api.actor",
+    "pk": 3,
+    "fields": {
+      "name": "Josh",
+      "city": "Shanghai"
+    }
+  },
+  {
+    "model": "api.movie",
+    "pk": 1,
+    "fields": {
+      "title": "Creed",
+      "actors": [1, 2],
+      "year": "2015"
+    }
+  },
+    {
+    "model": "api.movie",
+    "pk": 2,
+    "fields": {
+      "title": "Surface",
+      "actors": [2, 3],
+      "year": "2018"
+    }
+  }
+]
