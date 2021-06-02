@@ -25,24 +25,20 @@ class Query(ObjectType):
 
     def resolve_actor_in(self, info, **kwargs):
         city = kwargs.get('city')
-
         if city is not None:
             return Actor.objects.filter(city=city)
+        return None
 
     def resolve_actor(self, info, **kwargs):
         id = kwargs.get('id')
-
         if id is not None:
             return Actor.objects.get(pk=id)
-
         return None
 
     def resolve_movie(self, info, **kwargs):
         id = kwargs.get('id')
-
         if id is not None:
             return Movie.objects.get(pk=id)
-
         return None
 
     def resolve_actors(self, info, **kwargs):
@@ -116,14 +112,14 @@ class CreateMovie(graphene.Mutation):
         ok = True
         actors = []
         for actor_input in input.actors:
-          actor = Actor.objects.get(pk=actor_input.id)
-          if actor is None:
-            return CreateMovie(ok=False, movie=None)
-          actors.append(actor)
+            actor = Actor.objects.get(pk=actor_input.id)
+            if actor is None:
+                return CreateMovie(ok=False, movie=None)
+            actors.append(actor)
         movie_instance = Movie(
-          title=input.title,
-          year=input.year
-          )
+            title=input.title,
+            year=input.year
+        )
         movie_instance.save()
         movie_instance.actors.set(actors)
         return CreateMovie(ok=ok, movie=movie_instance)
@@ -145,12 +141,12 @@ class UpdateMovie(graphene.Mutation):
             ok = True
             actors = []
             for actor_input in input.actors:
-              actor = Actor.objects.get(pk=actor_input.id)
-              if actor is None:
-                return UpdateMovie(ok=False, movie=None)
-              actors.append(actor)
-            movie_instance.title=input.title
-            movie_instance.year=input.year
+                actor = Actor.objects.get(pk=actor_input.id)
+                if actor is None:
+                    return UpdateMovie(ok=False, movie=None)
+                actors.append(actor)
+            movie_instance.title = input.title
+            movie_instance.year = input.year
             movie_instance.save()
             movie_instance.actors.set(actors)
             return UpdateMovie(ok=ok, movie=movie_instance)
